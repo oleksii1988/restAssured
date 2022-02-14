@@ -40,7 +40,7 @@ public class GetData {
                 .get(URL+"event/2003827")
                 .then().log().all()
                 .extract().body().jsonPath().getString("status");
-           Assert.assertNotNull(marketData);
+           Assert.assertNotNull(marketData, "Generate new mapped_id");
     }
 
 
