@@ -39,8 +39,8 @@ public class GetData {
                .contentType(ContentType.JSON)
                 .get(URL+"event/2003827")
                 .then().log().all()
-                .extract().body().jsonPath().getString("status");
-           Assert.assertNotNull(marketData, "Generate new mapped_id");
+                .extract().body().jsonPath().getString("mappedId");
+           Assert.assertEquals(marketData, "2003827");
     }
 
 
