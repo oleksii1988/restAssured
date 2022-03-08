@@ -114,7 +114,7 @@ public class GetCategoriesTest {
     @Test(testName = "Checking items count per page")
     public void search_WhenFilterIsEmptyCheckingCountPerPage() {
         Specifications.installSpecifications(Specifications.requestSpec(), Specifications.responsSpec200());
-        SearchCategoryRequest postRequest = new SearchCategoryRequest(new SearchCategoryRequest.Paging(0,PER_PAGE,0,0));
+        SearchCategoryRequest postRequest = new SearchCategoryRequest(new SearchCategoryRequest.Paging(null,PER_PAGE,null,null));
         List<SearchCategoryResponse.Data> emptyFilterResponse = given()
                 .body(postRequest)
                 .when()
