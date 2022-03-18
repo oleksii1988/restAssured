@@ -30,6 +30,14 @@ public class CreateCategoryRequest {
 
     }
 
+        public Category(String name) {
+            this.name = name;
+        }
+
+        public Category(Integer sportId) {
+            this.sportId = sportId;
+        }
+
         public String getName() {
             return name;
         }
