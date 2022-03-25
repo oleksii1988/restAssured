@@ -1,7 +1,11 @@
 package jdbc;
+import lombok.SneakyThrows;
+public interface DAO  {
 
-public interface DAO <Entity, Key> {
+    @SneakyThrows
+    boolean delete(Integer key);
+    boolean getMap(Integer key);
+    boolean deleteMapping(Integer key);
 
-    boolean delete(Entity key);
 
 }

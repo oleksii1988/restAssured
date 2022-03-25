@@ -1,12 +1,12 @@
 package config;
 
 
-import model.CategoryModel;
+import lombok.SneakyThrows;
 
 import java.sql.*;
 
+public class ConnectionFactory {
 
-public class DatabaseConfig {
 
         private final String url = "jdbc:postgresql://postgres.feed-test.svc.cluster.local:5432/mapping_db";
         private final String user = "postgres";
@@ -14,17 +14,37 @@ public class DatabaseConfig {
 
         private final Connection connection = DriverManager.getConnection(url.trim(), user, password);
 
-        public Connection getConnection() {
-        return connection;
+
+
+    public ConnectionFactory() throws SQLException {
     }
 
+    @SneakyThrows
+    public PreparedStatement getPreparedStatement(String sql) {
+        PreparedStatement ps = connection.prepareStatement(sql);
 
-    public DatabaseConfig() throws SQLException {
-    }
+        try {
+            ps.getConnection().prepareStatement(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ps;
+        }
+
+        public void closePrepareStatement(PreparedStatement ps){
+
+            try{
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
 
-        {
-            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM category WHERE id = 325 and " +
+
+
+       /* {
+            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM category WHERE id = 326 and " +
                     "sport_id = 1")) {
 
                 //statement.setInt(1, 626);
@@ -44,7 +64,7 @@ public class DatabaseConfig {
             } finally {
                 connection.close();
             }
-        }
+        }*/
 
 
 
