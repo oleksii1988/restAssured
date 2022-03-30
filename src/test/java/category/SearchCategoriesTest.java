@@ -1,7 +1,7 @@
 package category;
 
-import RequestDto.SearchCategoryRequest;
-import ResponsDto.SearchCategoryResponse;
+import requestDto.category.SearchCategoryRequest;
+import responsDto.SearchCategoryResponse;
 import config.Specifications;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,7 +11,7 @@ import java.util.Objects;
 
 import static io.restassured.RestAssured.given;
 
-public class GetCategoriesTest {
+public class SearchCategoriesTest {
     private static final String NAME_CATEGORY = "England";
     private static final Integer SPORT_ID = 1;
     private static final Integer REGION_ID = 6;

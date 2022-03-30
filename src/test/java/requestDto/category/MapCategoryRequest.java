@@ -1,5 +1,8 @@
-package RequestDto;
+package requestDto.category;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class MapCategoryRequest {
 
 private String externalId;
@@ -33,6 +36,12 @@ public MapCategoryRequest(){
         this.externalId = externalId;
         this.mappedId = mappedId;
         this.single = single;
+    }
+
+    public MapCategoryRequest(String externalId, Integer mappedId, String provider) {
+        this.externalId = externalId;
+        this.mappedId = mappedId;
+        this.provider = provider;
     }
 
     public String getExternalId() {

@@ -1,7 +1,7 @@
 package category;
 
-import RequestDto.MapCategoryRequest;
-import ResponsDto.CreateCategoryResponse;
+import requestDto.category.MapCategoryRequest;
+import responsDto.CreateCategoryResponse;
 import config.Specifications;
 import jdbc.CategoryDAO;
 import model.CategoryMappingModel;

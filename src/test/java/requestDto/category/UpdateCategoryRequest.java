@@ -1,17 +1,17 @@
-package RequestDto;
+package requestDto.category;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 
-public class CreateCategoryRequest {
+public class UpdateCategoryRequest{
 
     private Category category;
 
-    public CreateCategoryRequest(Category category) {
+    public UpdateCategoryRequest(Category category) {
         this.category = category;
     }
-    public CreateCategoryRequest(){
+    public UpdateCategoryRequest(){
 
     }
 
@@ -20,30 +20,30 @@ public class CreateCategoryRequest {
     public static class Category {
 
         private String name;
-        private Integer sportId;
+        private Integer regionId;
 
-        public Category(String name, Integer sportId) {
+        public Category(String name, Integer regionId) {
             this.name = name;
-            this.sportId = sportId;
+            this.regionId = regionId;
         }
-    public Category(){
+        public Category(){}
 
-    }
+
 
         public Category(String name) {
             this.name = name;
         }
 
-        public Category(Integer sportId) {
-            this.sportId = sportId;
+        public Category(Integer regionId) {
+            this.regionId = regionId;
         }
 
         public String getName() {
             return name;
         }
 
-        public Integer getSportId() {
-            return sportId;
+        public Integer getRegionId() {
+            return regionId;
         }
     }
 

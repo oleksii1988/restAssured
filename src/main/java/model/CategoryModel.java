@@ -16,6 +16,12 @@ public class CategoryModel {
         this.region_id = region_id;
     }
 
+    public CategoryModel(int id, String name, int sport_id) {
+        this.id = id;
+        this.name = name;
+        this.sport_id = sport_id;
+    }
+
     public CategoryModel(){
 
     }

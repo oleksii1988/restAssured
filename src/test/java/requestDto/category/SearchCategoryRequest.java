@@ -1,4 +1,4 @@
-package RequestDto;
+package requestDto.category;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 

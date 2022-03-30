@@ -91,11 +91,44 @@ public class CategoryDAO implements DAO {
         return result;
     }
 
+    public CategoryModel getCategoryInDB(Integer x) {
+       final CategoryModel result = new CategoryModel();
+        result.setId(x);
+        PreparedStatement ps = connectionFactory.getPreparedStatement(CategoryQuerySQL.GET_CATEGORY.QUERY);
+        try {
+
+            ps.setInt(1, x);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            if(resultSet.next()) {
+
+                result.setId(resultSet.getInt("id"));
+                result.setName(resultSet.getString("name"));
+                result.setSport_id(resultSet.getInt("sport_id"));
+                result.setRegion_id(resultSet.getInt("region_id"));
+
+            }
+
+
+        } catch (SQLException e) {
+
+            System.out.println("Entity does not exist");
+        } finally {
+            connectionFactory.closePrepareStatement(ps);
+        }
+
+        return result;
+    }
+
+
+
+
     @SneakyThrows
     @Override
     public boolean deleteMapping(Integer key) {
         boolean result = false;
-        PreparedStatement ps = connectionFactory.getPreparedStatement(CategoryQuerySQL.DELETE_MAPPING.QUERY);
+        PreparedStatement ps = connectionFactory.getPreparedStatement(CategoryQuerySQL.DELETE_CATEGORY_MAPPING.QUERY);
         try{
             ps.setInt(1,key);
 
@@ -107,6 +140,54 @@ public class CategoryDAO implements DAO {
     } finally {
         connectionFactory.closePrepareStatement(ps);
     }
+
+        return result;
+
+    }
+
+    @Override
+    public boolean create(CategoryMappingModel model) {
+        boolean result = false;
+        PreparedStatement ps = connectionFactory.getPreparedStatement(CategoryQuerySQL.CREATE_CATEGORY_MAPPING.QUERY);
+
+        try{
+            ps.setString(1,model.getExternalId());
+            ps.setInt(2,model.getMappedId());
+            ps.setString(3,model.getProvider());
+            ps.setString(4,model.getName());
+
+            result =ps.executeQuery().next();
+        }
+        catch (SQLException e) {
+
+            System.out.println("Entity does not exist");
+        } finally {
+            connectionFactory.closePrepareStatement(ps);
+        }
+
+        return result;
+
+    }
+
+
+    public boolean createCategory(CategoryModel model) {
+        boolean result = false;
+        PreparedStatement ps = connectionFactory.getPreparedStatement(CategoryQuerySQL.CREATE_CATEGORY.QUERY);
+
+        try{
+            ps.setInt(1,model.getId());
+            ps.setString(2,model.getName());
+            ps.setInt(3,model.getSport_id());
+            ps.setInt(4,model.getRegion_id());
+
+            result =ps.executeQuery().next();
+        }
+        catch (SQLException e) {
+
+            System.out.println("Entity does not exist");
+        } finally {
+            connectionFactory.closePrepareStatement(ps);
+        }
 
         return result;
 
@@ -140,8 +221,6 @@ public class CategoryDAO implements DAO {
             connectionFactory.closePrepareStatement(ps);
         }
 
-
-        System.out.println(result);
         return result;
 
     }
@@ -150,7 +229,10 @@ public class CategoryDAO implements DAO {
     enum CategoryQuerySQL {
         DELETE_CATEGORY("DELETE FROM category WHERE id = (?)"),
         GET_MAP_CATEGORY("SELECT* FROM category_mapping WHERE mapped_id = (?)"),
-        DELETE_MAPPING("DELETE FROM category_mapping WHERE mapped_id = (?)");
+        DELETE_CATEGORY_MAPPING("DELETE FROM category_mapping WHERE mapped_id = (?)"),
+        CREATE_CATEGORY_MAPPING("INSERT INTO category_mapping (external_id, mapped_id, provider, name) VALUES ((?),(?),(?),(?))"),
+        CREATE_CATEGORY("INSERT INTO category (id, name, sport_id, region_id) VALUES ((?),(?),(?),(?))"),
+        GET_CATEGORY("SELECT* FROM category WHERE id = (?)");
 
 
         String QUERY;

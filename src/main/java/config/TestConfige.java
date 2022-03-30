@@ -2,6 +2,7 @@ package config;
 
 
 import jdbc.CategoryDAO;
+import model.CategoryMappingModel;
 import model.CategoryModel;
 
 import java.sql.PreparedStatement;
@@ -15,7 +16,8 @@ public class TestConfige {
 
         CategoryDAO categoryDAO = new CategoryDAO();
         ConnectionFactory connectionFactory = new ConnectionFactory();
-        CategoryModel categoryModel = new CategoryModel();
+        CategoryModel categoryModel = new CategoryModel(5000,"Ukraine",9,30);
+        CategoryMappingModel categoryMappingModel = new CategoryMappingModel("absolute:1:Ethiopia",171,"absolute","Ethiopia");
 
        /* {
             try (PreparedStatement statement = connectionFactory.getConnection().prepareStatement("SELECT * FROM category WHERE id = 326 and " +
@@ -42,7 +44,10 @@ public class TestConfige {
 
 
 
-        categoryDAO.getMapCategory(329);
+        //categoryDAO.getMapCategory(329);
+
+        //categoryDAO.create(categoryMappingModel);
+        categoryDAO.createCategory(categoryModel);
 
 
 
