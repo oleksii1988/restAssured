@@ -1,4 +1,4 @@
-package responsDto;
+package responsDto.category;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

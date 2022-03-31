@@ -1,19 +1,26 @@
 package requestDto.category;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.*;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 
-public class SearchCategoryRequest {
+public class SearchRequest {
 
     private Filter filter;
     private Paging paging;
+    private Sorting sorting;
 
-    public SearchCategoryRequest(Filter filter) {
+
+    public SearchRequest(Filter filter) {
         this.filter = filter;
     }
 
-    public SearchCategoryRequest(Paging paging) {
+    public SearchRequest(Sorting sorting) {
+        this.sorting = sorting;
+    }
+
+    public SearchRequest(Paging paging) {
         this.paging = paging;
     }
 
@@ -85,6 +92,22 @@ public class SearchCategoryRequest {
             return totalPages;
         }
     }
+
+    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @ToString
+    @EqualsAndHashCode
+
+    public static class Sorting{
+        private String direction;
+        private String fieldName;
+        private Integer order;
+
+    }
+
+
 
 
 }

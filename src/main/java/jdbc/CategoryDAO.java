@@ -1,7 +1,7 @@
 package jdbc;
 import config.ConnectionFactory;
 import lombok.SneakyThrows;
-import model.CategoryMappingModel;
+import model.MappingModel;
 import model.CategoryModel;
 
 import java.sql.PreparedStatement;
@@ -145,8 +145,8 @@ public class CategoryDAO implements DAO {
 
     }
 
-    @Override
-    public boolean create(CategoryMappingModel model) {
+
+    public boolean create(MappingModel model) {
         boolean result = false;
         PreparedStatement ps = connectionFactory.getPreparedStatement(CategoryQuerySQL.CREATE_CATEGORY_MAPPING.QUERY);
 
@@ -194,9 +194,9 @@ public class CategoryDAO implements DAO {
     }
 
 
-    public CategoryMappingModel getMapCategory(Integer key) {
+    public MappingModel getMapCategory(Integer key) {
 
-        final CategoryMappingModel result = new CategoryMappingModel();
+        final MappingModel result = new MappingModel();
         result.setMappedId(key);
         PreparedStatement ps = connectionFactory.getPreparedStatement(CategoryQuerySQL.GET_MAP_CATEGORY.QUERY);
         try {

@@ -3,7 +3,7 @@ package category;
 import config.Specifications;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import responsDto.CreateCategoryResponse;
+import responsDto.category.CreateCategoryResponse;
 
 import static io.restassured.RestAssured.given;
 

@@ -1,4 +1,4 @@
-package requestDto.event;
+package requestDto.sport;
 
 public class LoadEventsRequest {
 }

@@ -1,7 +1,7 @@
 package category;
 
-import requestDto.category.SearchCategoryRequest;
-import responsDto.SearchCategoryResponse;
+import requestDto.category.SearchRequest;
+import responsDto.category.SearchCategoryResponse;
 import config.Specifications;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -25,7 +25,7 @@ public class SearchCategoriesTest {
     @Test(testName = "Checking filter by category name and sportId")
     public void search_UseNameAndSportId_FullInfoByCategory() {
         Specifications.installSpecifications(Specifications.requestSpec(), Specifications.responseSpec200());
-        SearchCategoryRequest postRequest = new SearchCategoryRequest(new SearchCategoryRequest.Filter(NAME_CATEGORY, SPORT_ID));
+        SearchRequest postRequest = new SearchRequest(new SearchRequest.Filter(NAME_CATEGORY, SPORT_ID));
         SearchCategoryResponse responseCategories = given()
                 .body(postRequest)
                 .when()
@@ -44,7 +44,7 @@ public class SearchCategoriesTest {
     @Test(testName = "Checking a single region_id by category name")
     public void search_whenUseNameAndCheckRegionId_() {
         Specifications.installSpecifications(Specifications.requestSpec(), Specifications.responseSpec200());
-        SearchCategoryRequest postRequest = new SearchCategoryRequest(new SearchCategoryRequest.Filter(NAME_CATEGORY));
+        SearchRequest postRequest = new SearchRequest(new SearchRequest.Filter(NAME_CATEGORY));
         List<SearchCategoryResponse.Data> responseRegionId = given()
                 .body(postRequest)
                 .when()
@@ -65,7 +65,7 @@ public class SearchCategoriesTest {
     @Test(testName = "Checking filter by sportId")
     public void search_WhenUseSportId() {
         Specifications.installSpecifications(Specifications.requestSpec(), Specifications.responseSpec200());
-        SearchCategoryRequest postRequest = new SearchCategoryRequest(new SearchCategoryRequest.Filter(SPORT_ID));
+        SearchRequest postRequest = new SearchRequest(new SearchRequest.Filter(SPORT_ID));
         List<SearchCategoryResponse.Data> sportIdResponse = given()
                 .body(postRequest)
                 .when()
@@ -91,7 +91,7 @@ public class SearchCategoriesTest {
     @Test(testName = "Checking filter when is empty")
     public void search_WhenFilterIsEmpty() {
         Specifications.installSpecifications(Specifications.requestSpec(), Specifications.responseSpec200());
-        SearchCategoryRequest postRequest = new SearchCategoryRequest(new SearchCategoryRequest.Filter());
+        SearchRequest postRequest = new SearchRequest(new SearchRequest.Filter());
         List<SearchCategoryResponse.Data> emptyFilterResponse = given()
                 .body(postRequest)
                 .when()
@@ -114,7 +114,7 @@ public class SearchCategoriesTest {
     @Test(testName = "Checking items count per page")
     public void search_WhenFilterIsEmptyCheckingCountPerPage() {
         Specifications.installSpecifications(Specifications.requestSpec(), Specifications.responseSpec200());
-        SearchCategoryRequest postRequest = new SearchCategoryRequest(new SearchCategoryRequest.Paging(null,PER_PAGE,null,null));
+        SearchRequest postRequest = new SearchRequest(new SearchRequest.Paging(null,PER_PAGE,null,null));
         List<SearchCategoryResponse.Data> perPageFilterResponse = given()
                 .body(postRequest)
                 .when()

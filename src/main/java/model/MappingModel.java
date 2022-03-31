@@ -2,7 +2,7 @@ package model;
 
 import java.util.Objects;
 
-public class CategoryMappingModel {
+public class MappingModel {
 
         private String externalId;
         private Integer mappedId;
@@ -10,7 +10,7 @@ public class CategoryMappingModel {
         private String name;
 
 
-        public CategoryMappingModel(String externalId, Integer mappedId, String provider, String name) {
+        public MappingModel(String externalId, Integer mappedId, String provider, String name) {
             this.externalId = externalId;
             this.mappedId = mappedId;
             this.provider = provider;
@@ -19,7 +19,7 @@ public class CategoryMappingModel {
 
 
         }
-        public CategoryMappingModel(){
+        public MappingModel(){
 
         }
 
@@ -70,7 +70,7 @@ public class CategoryMappingModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CategoryMappingModel that = (CategoryMappingModel) o;
+        MappingModel that = (MappingModel) o;
         return Objects.equals(externalId, that.externalId) && Objects.equals(mappedId, that.mappedId) && Objects.equals(provider, that.provider) && Objects.equals(name, that.name);
     }
 

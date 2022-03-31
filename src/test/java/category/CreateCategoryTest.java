@@ -1,6 +1,6 @@
 package category;
 import requestDto.category.CreateCategoryRequest;
-import responsDto.CreateCategoryResponse;
+import responsDto.category.CreateCategoryResponse;
 import config.Specifications;
 import jdbc.CategoryDAO;
 import org.testng.Assert;

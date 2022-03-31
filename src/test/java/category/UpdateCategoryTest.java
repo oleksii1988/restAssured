@@ -7,7 +7,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import requestDto.category.UpdateCategoryRequest;
-import responsDto.CreateCategoryResponse;
+import responsDto.category.CreateCategoryResponse;
 import java.sql.SQLException;
 import static io.restassured.RestAssured.given;
 

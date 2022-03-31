@@ -3,42 +3,42 @@ package requestDto.category;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class MapCategoryRequest {
+public class MapRequest {
 
 private String externalId;
 private Integer mappedId;
 private String provider;
 private Boolean single;
 
-    public MapCategoryRequest(String externalId, Integer mappedId, String provider, Boolean single) {
+    public MapRequest(String externalId, Integer mappedId, String provider, Boolean single) {
         this.externalId = externalId;
         this.mappedId = mappedId;
         this.provider = provider;
         this.single = single;
     }
-public MapCategoryRequest(){
+public MapRequest(){
 
 }
 
-    public MapCategoryRequest(Integer mappedId, String provider, Boolean single) {
+    public MapRequest(Integer mappedId, String provider, Boolean single) {
         this.mappedId = mappedId;
         this.provider = provider;
         this.single = single;
     }
 
-    public MapCategoryRequest(String externalId, String provider, Boolean single) {
+    public MapRequest(String externalId, String provider, Boolean single) {
         this.externalId = externalId;
         this.provider = provider;
         this.single = single;
     }
 
-    public MapCategoryRequest(String externalId, Integer mappedId, Boolean single) {
+    public MapRequest(String externalId, Integer mappedId, Boolean single) {
         this.externalId = externalId;
         this.mappedId = mappedId;
         this.single = single;
     }
 
-    public MapCategoryRequest(String externalId, Integer mappedId, String provider) {
+    public MapRequest(String externalId, Integer mappedId, String provider) {
         this.externalId = externalId;
         this.mappedId = mappedId;
         this.provider = provider;

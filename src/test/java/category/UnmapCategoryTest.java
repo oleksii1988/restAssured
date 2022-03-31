@@ -1,10 +1,10 @@
 package category;
 
 import jdbc.CategoryDAO;
-import model.CategoryMappingModel;
+import model.MappingModel;
 import org.testng.annotations.BeforeTest;
-import requestDto.category.MapCategoryRequest;
-import responsDto.UnmapCategoryResponse;
+import requestDto.category.MapRequest;
+import responsDto.category.UnmapCategoryResponse;
 import config.Specifications;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -26,7 +26,7 @@ public class UnmapCategoryTest {
 
     private static final String URL_ENDPOINT = "/category:unmap";
     CategoryDAO categoryDAO = new CategoryDAO();
-    CategoryMappingModel createMapping = new CategoryMappingModel(EXTERNAL_ID,CATEGORY_ID,PROVIDER,CATEGORY_NAME);
+    MappingModel createMapping = new MappingModel(EXTERNAL_ID,CATEGORY_ID,PROVIDER,CATEGORY_NAME);
 
     public UnmapCategoryTest() throws SQLException {
     }
@@ -39,7 +39,7 @@ public class UnmapCategoryTest {
     @Test(testName = "Unmap category and checking not present entity in db")
     public void unmap_Category() {
         Specifications.installSpecifications(Specifications.requestSpec(), Specifications.responseSpec200());
-        MapCategoryRequest postRequest = new MapCategoryRequest(EXTERNAL_ID, CATEGORY_ID, PROVIDER);
+        MapRequest postRequest = new MapRequest(EXTERNAL_ID, CATEGORY_ID, PROVIDER);
         UnmapCategoryResponse response = given()
                 .body(postRequest)
                 .when()
@@ -59,7 +59,7 @@ public class UnmapCategoryTest {
     @Test(testName = "Unmap category with unvalidated category_id")
     public void unmap_Category_WithNonExistentCategoryId_ExpectedCode404()  {
         Specifications.installSpecifications(Specifications.requestSpec(), Specifications.responseSpec404());
-        MapCategoryRequest postRequest = new MapCategoryRequest(EXTERNAL_ID,NON_EXISTENT_CATEGORY_ID,PROVIDER);
+        MapRequest postRequest = new MapRequest(EXTERNAL_ID,NON_EXISTENT_CATEGORY_ID,PROVIDER);
         UnmapCategoryResponse response = given()
                 .body(postRequest)
                 .when()
@@ -76,7 +76,7 @@ public class UnmapCategoryTest {
     @Test(testName = "Unmap category with unvalidated external_id")
     public void unmap_Category_WithNonExistentExternalId_ExpectedCode404()  {
         Specifications.installSpecifications(Specifications.requestSpec(), Specifications.responseSpec404());
-        MapCategoryRequest postRequest = new MapCategoryRequest(NON_EXISTENT_EXTERNAL_ID,CATEGORY_ID,PROVIDER);
+        MapRequest postRequest = new MapRequest(NON_EXISTENT_EXTERNAL_ID,CATEGORY_ID,PROVIDER);
         UnmapCategoryResponse response = given()
                 .body(postRequest)
                 .when()
