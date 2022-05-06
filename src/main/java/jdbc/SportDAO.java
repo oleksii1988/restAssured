@@ -2,11 +2,13 @@ package jdbc;
 
 import config.ConnectionFactory;
 import lombok.SneakyThrows;
-import model.MappingModel;
+import modelDB.MappingModel;
+import modelDB.SportModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 
 public class SportDAO implements DAO{
 
@@ -17,9 +19,30 @@ public class SportDAO implements DAO{
     }
 
     @Override
+    @SneakyThrows
     public boolean delete(Integer key) {
-        return false;
+
+        boolean result = false;
+
+        PreparedStatement ps = connectionFactory.getPreparedStatement(SportDAO.SportQuerySQL.DELETE_SPORT.QUERY);
+        try {
+
+            ps.setInt(1, key);
+
+
+            result = ps.execute();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionFactory.closePrepareStatement(ps);
+        }
+
+        return result;
     }
+
+
 
     @Override
     @SneakyThrows
@@ -34,8 +57,7 @@ public class SportDAO implements DAO{
 
 
         } catch (SQLException e) {
-
-            System.out.println("Entity does not exist");
+            e.printStackTrace();
         } finally {
             connectionFactory.closePrepareStatement(ps);
         }
@@ -64,8 +86,7 @@ public class SportDAO implements DAO{
 
 
         } catch (SQLException e) {
-
-            System.out.println("Entity does not exist");
+            e.printStackTrace();
         } finally {
             connectionFactory.closePrepareStatement(ps);
         }
@@ -82,11 +103,86 @@ public class SportDAO implements DAO{
         try{
             ps.setInt(1,key);
 
-            result =ps.executeQuery().next();
+            result =ps.execute();
         }
         catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionFactory.closePrepareStatement(ps);
+        }
 
-            System.out.println("Entity does not exist");
+        return result;
+
+    }
+
+    @SneakyThrows
+    @Override
+    public boolean createMapping(MappingModel model) {
+        boolean result = false;
+        PreparedStatement ps = connectionFactory.getPreparedStatement(SportDAO.SportQuerySQL.CREATE_SPORT_MAPPING.QUERY);
+
+        try{
+            ps.setString(1,model.getExternalId());
+            ps.setInt(2,model.getMappedId());
+            ps.setString(3,model.getProvider());
+            ps.setString(4,model.getName());
+
+            result =ps.execute();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionFactory.closePrepareStatement(ps);
+        }
+
+        return result;
+
+    }
+
+    public SportModel getSportById(Integer key) {
+
+        final SportModel result = new SportModel();
+        result.setId(key);
+        PreparedStatement ps = connectionFactory.getPreparedStatement(SportDAO.SportQuerySQL.GET_SPORT.QUERY);
+        try {
+
+            ps.setInt(1, key);
+
+            final ResultSet resultSet = ps.executeQuery();
+
+            if(resultSet.next()) {
+
+                result.setId(resultSet.getInt("id"));
+                result.setName(resultSet.getString("name"));
+                /*result.setTranslations(resultSet.getObject("translations",));*/
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionFactory.closePrepareStatement(ps);
+        }
+
+
+        return result;
+
+    }
+
+    public boolean createNewSport(SportModel model) {
+        boolean result = false;
+        PreparedStatement ps = connectionFactory.getPreparedStatement(SportDAO.SportQuerySQL.CREATE_SPORT.QUERY);
+
+        try{
+            ps.setInt(1,model.getId());
+            ps.setString(2,model.getName());
+
+
+            result = ps.execute();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             connectionFactory.closePrepareStatement(ps);
         }
@@ -97,12 +193,12 @@ public class SportDAO implements DAO{
 
 
     enum SportQuerySQL {
-        DELETE_CATEGORY("DELETE FROM category WHERE id = (?)"),
+        DELETE_SPORT("DELETE FROM sport WHERE id = (?)"),
         GET_MAP_SPORT("SELECT* FROM sport_mapping WHERE mapped_id = (?)"),
         DELETE_SPORT_MAPPING("DELETE FROM sport_mapping WHERE mapped_id = (?)"),
-        CREATE_CATEGORY_MAPPING("INSERT INTO category_mapping (external_id, mapped_id, provider, name) VALUES ((?),(?),(?),(?))"),
-        CREATE_CATEGORY("INSERT INTO category (id, name, sport_id, region_id) VALUES ((?),(?),(?),(?))"),
-        GET_CATEGORY("SELECT* FROM category WHERE id = (?)");
+        CREATE_SPORT_MAPPING("INSERT INTO sport_mapping (external_id, mapped_id, provider, name) VALUES ((?),(?),(?),(?))"),
+        CREATE_SPORT("INSERT INTO sport (id, name) VALUES ((?),(?))"),
+        GET_SPORT("SELECT* FROM sport WHERE id = (?)");
 
 
         String QUERY;

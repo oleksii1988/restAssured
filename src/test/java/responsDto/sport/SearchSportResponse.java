@@ -1,60 +1,44 @@
 package responsDto.sport;
 
+import com.atlas.common.enums.Language;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import responsDto.category.SearchCategoryResponse;
 
 import java.util.ArrayList;
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+import java.util.Map;
+
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+
 public class SearchSportResponse{
 
-    private ArrayList<Data> data;
+    private ArrayList<DataType> data;
 
-    public ArrayList<Data> getData() {
-        return data;
-    }
-    /*private ArrayList <Sorting> sorting;
 
-    public ArrayList<Sorting> getSorting() {
-        return sorting;
-    }*/
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
     @AllArgsConstructor
     @NoArgsConstructor
     @ToString
-    @lombok.Data
+    @Data
     @EqualsAndHashCode
-public static class Data{
+public static class DataType{
 
       private String name;
       private Integer mappedId;
-      private SearchCategoryResponse.Translations translations;
+      private Map<Language, String> translations;
 
     }
-
-    /*@JsonIgnoreProperties(ignoreUnknown = true)
-    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @ToString
-    @lombok.Data
-    @EqualsAndHashCode
-
-    public static class Sorting{
-        private Integer order;
-        private String  fieldName;
-        private String  direction;
-    }*/
 
 
 }
