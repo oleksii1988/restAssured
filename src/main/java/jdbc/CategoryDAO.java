@@ -1,8 +1,8 @@
 package jdbc;
 import config.ConnectionFactory;
 import lombok.SneakyThrows;
-import model.MappingModel;
-import model.CategoryModel;
+import modelDB.MappingModel;
+import modelDB.CategoryModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,7 +61,7 @@ public class CategoryDAO implements DAO {
 
         } catch (SQLException e) {
 
-            System.out.println("Entity does not exist");
+
         } finally {
             connectionFactory.closePrepareStatement(ps);
         }
@@ -83,7 +83,7 @@ public class CategoryDAO implements DAO {
 
         } catch (SQLException e) {
 
-            System.out.println("Entity does not exist");
+
         } finally {
             connectionFactory.closePrepareStatement(ps);
         }
@@ -113,7 +113,7 @@ public class CategoryDAO implements DAO {
 
         } catch (SQLException e) {
 
-            System.out.println("Entity does not exist");
+
         } finally {
             connectionFactory.closePrepareStatement(ps);
         }
@@ -132,11 +132,11 @@ public class CategoryDAO implements DAO {
         try{
             ps.setInt(1,key);
 
-            result =ps.executeQuery().next();
+            result = ps.execute();
         }
      catch (SQLException e) {
 
-        System.out.println("Entity does not exist");
+         e.printStackTrace();
     } finally {
         connectionFactory.closePrepareStatement(ps);
     }
@@ -146,7 +146,9 @@ public class CategoryDAO implements DAO {
     }
 
 
-    public boolean create(MappingModel model) {
+    @SneakyThrows
+    @Override
+    public boolean createMapping(MappingModel model) {
         boolean result = false;
         PreparedStatement ps = connectionFactory.getPreparedStatement(CategoryQuerySQL.CREATE_CATEGORY_MAPPING.QUERY);
 
@@ -160,7 +162,7 @@ public class CategoryDAO implements DAO {
         }
         catch (SQLException e) {
 
-            System.out.println("Entity does not exist");
+
         } finally {
             connectionFactory.closePrepareStatement(ps);
         }
@@ -180,11 +182,11 @@ public class CategoryDAO implements DAO {
             ps.setInt(3,model.getSport_id());
             ps.setInt(4,model.getRegion_id());
 
-            result =ps.executeQuery().next();
+            result = ps.execute();
         }
         catch (SQLException e) {
 
-            System.out.println("Entity does not exist");
+            e.printStackTrace();
         } finally {
             connectionFactory.closePrepareStatement(ps);
         }
@@ -216,7 +218,7 @@ public class CategoryDAO implements DAO {
 
         } catch (SQLException e) {
 
-            System.out.println("Entity does not exist");
+
         } finally {
             connectionFactory.closePrepareStatement(ps);
         }

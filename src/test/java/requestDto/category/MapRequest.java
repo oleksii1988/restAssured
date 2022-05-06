@@ -1,63 +1,57 @@
 package requestDto.category;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.*;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+
+@Data
+@ToString
+@EqualsAndHashCode
+
 public class MapRequest {
 
-private String externalId;
-private Integer mappedId;
-private String provider;
-private Boolean single;
+    private String externalId;
+    private Integer mappedId;
+    private String provider;
+    private Boolean single;
 
-    public MapRequest(String externalId, Integer mappedId, String provider, Boolean single) {
-        this.externalId = externalId;
-        this.mappedId = mappedId;
-        this.provider = provider;
-        this.single = single;
+    @Data
+    @ToString
+    @EqualsAndHashCode
+
+
+  public static class MapRequestBuilderImpl {
+
+       private MapRequest mapRequest;
+
+       public MapRequestBuilderImpl(){
+           mapRequest = new MapRequest();
+       }
+
+        public MapRequestBuilderImpl setExternalId(String externalId){
+           mapRequest.externalId = externalId;
+           return this;
+        }
+
+        public MapRequestBuilderImpl setMappedId(Integer mappedId){
+            mapRequest.mappedId = mappedId;
+            return this;
+        }
+
+        public MapRequestBuilderImpl setProvider(String provider){
+            mapRequest.provider = provider;
+            return this;
+        }
+
+        public MapRequestBuilderImpl setSingle(Boolean single){
+            mapRequest.single = single;
+            return this;
+        }
+
+        public MapRequest build(){
+
+            return mapRequest;
+        }
+
     }
-public MapRequest(){
-
-}
-
-    public MapRequest(Integer mappedId, String provider, Boolean single) {
-        this.mappedId = mappedId;
-        this.provider = provider;
-        this.single = single;
-    }
-
-    public MapRequest(String externalId, String provider, Boolean single) {
-        this.externalId = externalId;
-        this.provider = provider;
-        this.single = single;
-    }
-
-    public MapRequest(String externalId, Integer mappedId, Boolean single) {
-        this.externalId = externalId;
-        this.mappedId = mappedId;
-        this.single = single;
-    }
-
-    public MapRequest(String externalId, Integer mappedId, String provider) {
-        this.externalId = externalId;
-        this.mappedId = mappedId;
-        this.provider = provider;
-    }
-
-    public String getExternalId() {
-        return externalId;
-    }
-
-    public Integer getMappedId() {
-        return mappedId;
-    }
-
-    public String getProvider() {
-        return provider;
-    }
-
-    public Boolean getSingle() {
-        return single;
-    }
-
 }

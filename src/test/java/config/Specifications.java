@@ -56,6 +56,14 @@ public static ResponseSpecification responseSpec200(){
 
     }
 
+    public static ResponseSpecification responseSpec500(){
+        return new ResponseSpecBuilder()
+                .expectStatusCode(500)
+                .build();
+
+
+    }
+
 public static void installSpecifications(RequestSpecification request, ResponseSpecification response){
     RestAssured.requestSpecification = request;
     RestAssured.responseSpecification = response;

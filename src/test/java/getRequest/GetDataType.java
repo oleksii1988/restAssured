@@ -1,27 +1,23 @@
 package getRequest;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.internal.path.json.JSONAssertion;
 import io.restassured.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 
-public class GetData {
-    private final static Logger LOGGER = LoggerFactory.getLogger(GetData.class);
+public class GetDataType {
+    private final static Logger LOGGER = LoggerFactory.getLogger(GetDataType.class);
 
     private static final String URL = "https://mapping-service-feed-test.k8s-hz.atlas-iac.com/bo/mapping/";
 
     @Test
+    @Ignore
     public void getMarketTypeById() {
         Response resp = RestAssured.get(URL + "market-type/346");
         String respons = resp.body().asString();
@@ -32,6 +28,7 @@ public class GetData {
     }
 
     @Test
+    @Ignore
     public void validateMarketType() {
 
         String  marketData = given().

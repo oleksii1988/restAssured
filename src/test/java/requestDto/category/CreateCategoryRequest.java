@@ -1,51 +1,76 @@
 package requestDto.category;
 
+import com.atlas.common.enums.Language;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.*;
+
+import java.util.Map;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-
+@Data
+@ToString
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class CreateCategoryRequest {
 
     private Category category;
 
-    public CreateCategoryRequest(Category category) {
-        this.category = category;
-    }
-    public CreateCategoryRequest(){
 
-    }
-
+    @Data
+    @ToString
+    @EqualsAndHashCode
+    @AllArgsConstructor
+    @NoArgsConstructor
     @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 
     public static class Category {
 
         private String name;
         private Integer sportId;
-
-        public Category(String name, Integer sportId) {
-            this.name = name;
-            this.sportId = sportId;
-        }
-    public Category(){
+        private Map<Language, String> translations;
 
     }
 
-        public Category(String name) {
-            this.name = name;
-        }
+public interface CreateCategoryBuilder {
 
-        public Category(Integer sportId) {
-            this.sportId = sportId;
-        }
+    CreateCategoryBuilder setName(String name);
+    CreateCategoryBuilder setSportId (Integer sportId);
+    CreateCategoryBuilder setTranslations (Map<Language, String> translations);
+    CreateCategoryRequest build();
 
-        public String getName() {
-            return name;
-        }
 
-        public Integer getSportId() {
-            return sportId;
-        }
+}
+
+
+public static class CreateTournamentBuilderImpl implements CreateCategoryBuilder{
+
+        Category category = new Category();
+
+        @Override
+    public CreateCategoryBuilder setName(String name) {
+        category.name = name;
+            return this;
     }
+
+    @Override
+    public CreateCategoryBuilder setSportId(Integer sportId) {
+        category.sportId = sportId;
+            return this;
+    }
+
+    @Override
+    public CreateCategoryBuilder setTranslations(Map<Language, String> translations) {
+        category.translations = translations;
+            return this;
+    }
+
+    @Override
+    public CreateCategoryRequest build() {
+        return new CreateCategoryRequest(category);
+    }
+}
+
 
 
 }

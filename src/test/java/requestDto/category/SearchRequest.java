@@ -3,110 +3,68 @@ package requestDto.category;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.*;
 
+@Data
+@ToString
+@AllArgsConstructor
+@EqualsAndHashCode
+@NoArgsConstructor
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 
 public class SearchRequest {
 
     private Filter filter;
-    private Paging paging;
-    private Sorting sorting;
 
 
-    public SearchRequest(Filter filter) {
-        this.filter = filter;
-    }
-
-    public SearchRequest(Sorting sorting) {
-        this.sorting = sorting;
-    }
-
-    public SearchRequest(Paging paging) {
-        this.paging = paging;
-    }
-
+    @Data
+    @ToString
+    @AllArgsConstructor
+    @EqualsAndHashCode
+    @NoArgsConstructor
     @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 
     public static class Filter {
 
         private String name;
         private Integer sportId;
-
-        public Filter(String name, Integer sportId) {
-            this.name = name;
-            this.sportId = sportId;
-        }
-
-        public Filter(String name) {
-            this.name = name;
-        }
-
-        public Filter(Integer sportId) {
-            this.sportId = sportId;
-        }
-
-        public Filter() {
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public Integer getSportId() {
-            return sportId;
-        }
-    }
-
-
-    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-
-    public static class Paging {
-        private Integer currentPage;
-        private Integer itemsPerPage;
-        private Integer totalItems;
-        private Integer totalPages;
-
-        public Paging(Integer currentPage, Integer itemsPerPage, Integer totalItems, Integer totalPages) {
-            this.currentPage = currentPage;
-            this.itemsPerPage = itemsPerPage;
-            this.totalItems = totalItems;
-            this.totalPages = totalPages;
-        }
-
-    public Paging(){
+        private Integer categoryId;
 
     }
 
-        public Integer getCurrentPage() {
-            return currentPage;
-        }
+public interface SearchRequestBuilder {
 
-        public Integer getItemsPerPage() {
-            return itemsPerPage;
-        }
-
-        public Integer getTotalItems() {
-            return totalItems;
-        }
-
-        public Integer getTotalPages() {
-            return totalPages;
-        }
-    }
-
-    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @ToString
-    @EqualsAndHashCode
-
-    public static class Sorting{
-        private String direction;
-        private String fieldName;
-        private Integer order;
+    SearchRequestBuilder setName(String name);
+    SearchRequestBuilder setSportId (Integer sportId);
+    SearchRequestBuilder setCategoryId (Integer categoryId);
+    SearchRequest build();
 
     }
 
+public static class SearchRequestBuilderImpl implements SearchRequestBuilder{
+
+        Filter filter = new Filter();
+    @Override
+    public SearchRequestBuilder setName(String name) {
+        filter.name = name;
+        return this;
+    }
+
+    @Override
+    public SearchRequestBuilder setSportId(Integer sportId) {
+        filter.sportId = sportId;
+        return this;
+    }
+
+    @Override
+    public SearchRequestBuilder setCategoryId(Integer categoryId) {
+        filter.categoryId = categoryId;
+        return this;
+    }
+
+    @Override
+    public SearchRequest build() {
+        return new SearchRequest(filter);
+    }
+}
 
 
 
