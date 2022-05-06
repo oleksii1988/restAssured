@@ -1,6 +1,6 @@
 package jdbc;
 
-import config.ConnectionFactory;
+import connectionDB.ConnectionConfig;
 import lombok.SneakyThrows;
 import modelDB.CategoryModel;
 import modelDB.MappingModel;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 public class TournamentDAO implements DAO {
 
-    ConnectionFactory connectionFactory = new ConnectionFactory();
+    ConnectionConfig connectionFactory = new ConnectionConfig();
 
     public TournamentDAO() throws SQLException {
     }

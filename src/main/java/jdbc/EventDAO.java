@@ -1,6 +1,6 @@
 package jdbc;
 
-import config.ConnectionFactory;
+import connectionDB.ConnectionConfig;
 import modelDB.EventModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class EventDAO {
 
-    ConnectionFactory connectionFactory = new ConnectionFactory();
+    ConnectionConfig connectionFactory = new ConnectionConfig();
 
     public EventDAO() throws SQLException {
     }

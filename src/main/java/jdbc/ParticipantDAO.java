@@ -1,18 +1,16 @@
 package jdbc;
 
-import config.ConnectionFactory;
+import connectionDB.ConnectionConfig;
 import lombok.SneakyThrows;
 import modelDB.MappingModel;
 import modelDB.ParticipantModel;
-import modelDB.TournamentModel;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ParticipantDAO implements DAO {
 
-    ConnectionFactory connectionFactory = new ConnectionFactory();
+    ConnectionConfig connectionFactory = new ConnectionConfig();
 
     public ParticipantDAO() throws SQLException {
     }

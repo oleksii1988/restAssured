@@ -1,9 +1,8 @@
 package jdbc;
-import config.ConnectionFactory;
+import connectionDB.ConnectionConfig;
 import lombok.SneakyThrows;
 import modelDB.MappingModel;
 import modelDB.CategoryModel;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,37 +11,12 @@ import java.sql.SQLException;
 
 public class CategoryDAO implements DAO {
 
-
-    CategoryModel categoryModel = new CategoryModel();
-    ConnectionFactory connectionFactory = new ConnectionFactory();
+    ConnectionConfig connectionFactory = new ConnectionConfig();
 
     @SneakyThrows
     public CategoryDAO() throws SQLException {
 
     }
-
-
- /*   @Override
-    public boolean delete(Integer key) throws SQLException {
-
-        boolean result = false;
-
-        try (PreparedStatement statement = databaseConfig.getConnection().prepareStatement(CategoryQuerySQL.DELETE.QUERY)) {
-
-            statement.setInt(1, key);
-
-            result = statement.executeQuery().next();
-
-
-        } catch (SQLException e) {
-
-            System.out.println("Entity does not exist");
-        } finally {
-            databaseConfig.getConnection().close();
-        }
-
-        return result;
-    }*/
 
     @Override
     @SneakyThrows

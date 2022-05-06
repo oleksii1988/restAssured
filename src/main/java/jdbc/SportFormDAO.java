@@ -1,9 +1,8 @@
 package jdbc;
 
-import config.ConnectionFactory;
+import connectionDB.ConnectionConfig;
 import modelDB.SportFormModel;
 import org.postgresql.util.PGobject;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +11,7 @@ import java.util.Map;
 
 public class SportFormDAO  {
 
-    ConnectionFactory connectionFactory = new ConnectionFactory();
+    ConnectionConfig connectionFactory = new ConnectionConfig();
 
     public SportFormDAO() throws SQLException {
     }
