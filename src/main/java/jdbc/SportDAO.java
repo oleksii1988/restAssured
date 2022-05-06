@@ -1,6 +1,5 @@
 package jdbc;
-
-import config.ConnectionFactory;
+import connectionDB.ConnectionConfig;
 import lombok.SneakyThrows;
 import modelDB.MappingModel;
 import modelDB.SportModel;
@@ -12,7 +11,7 @@ import java.sql.SQLException;
 
 public class SportDAO implements DAO{
 
-    ConnectionFactory connectionFactory = new ConnectionFactory();
+    ConnectionConfig connectionFactory = new ConnectionConfig();
 
     @SneakyThrows
     public SportDAO() throws SQLException {
@@ -154,7 +153,6 @@ public class SportDAO implements DAO{
 
                 result.setId(resultSet.getInt("id"));
                 result.setName(resultSet.getString("name"));
-                /*result.setTranslations(resultSet.getObject("translations",));*/
 
             }
 
