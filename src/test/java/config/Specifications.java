@@ -9,12 +9,7 @@ import io.restassured.specification.ResponseSpecification;
 
 public class Specifications {
 
-public static RequestSpecification requestSpec(){
-    return new RequestSpecBuilder()
-            .setBaseUri("https://mapping-service-feed-test.k8s-hz.atlas-iac.com/bo/mapping")
-            .setContentType(ContentType.JSON)
-            .build();
-}
+
 
 public static ResponseSpecification responseSpec200(){
     return new ResponseSpecBuilder()
